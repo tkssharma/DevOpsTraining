@@ -2,6 +2,7 @@ var quizQuestions = [
   {
     question: "What franchise would you rather play a game from?",
     answerindex : 1,
+    
     answers: [
       {
         type: "IBM",
