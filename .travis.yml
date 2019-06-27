@@ -4,6 +4,9 @@ node_js:
 cache:
   directories:
     - node_modules
+install:
+- yarn
+- yarn test    
 deploy:
 - provider: s3
   access_key_id: $AWS_ACCESS_KEY
@@ -26,6 +29,7 @@ deploy:
   on:
     branch: travis-ci-codedeploy-ec2
 script:
+  - rm -rf node_modules
   - zip -r latest *
   - mkdir -p dpl_cd_upload
   - mv latest.zip dpl_cd_upload/latest.zip
