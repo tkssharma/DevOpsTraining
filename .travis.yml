@@ -1,0 +1,21 @@
+language: node_js
+node_js:
+  - '10'
+  - node
+install:
+- yarn global add travis-ci-cloudfront-invalidation
+- yarn
+script:
+- yarn test
+- yarn build
+deploy:
+  provider: s3
+  access_key_id: $AWS_ACCESS_ID
+  secret_access_key: $AWS_SECRET_ID
+  bucket: 'XXX-frontend-app'
+  local_dir: dist
+  skip_cleanup: true
+  on:
+    branch: master
+after_deploy:
+  - travis-ci-cloudfront-invalidation -a $AWS_ACCESS_ID -s $AWS_SECRET_ID -c $CF_ID -i '/*' -b $TRAVIS_BRANCH -p $TRAVIS_PULL_REQUEST
