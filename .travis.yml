@@ -1,12 +1,13 @@
+warnings_are_errors: false
 language: node_js
-node_js: 
-  - "stable"
+node_js:
+  - '10'
+  - node
+install:
+- npm install
 cache:
   directories:
     - node_modules
-install:
-- npm install
-- npm run test    
 deploy:
 - provider: s3
   access_key_id: $AWS_ACCESS_KEY
@@ -28,6 +29,8 @@ deploy:
   region: us-west-2
   on:
     branch: travis-ci-codedeploy-ec2
+before_script:
+- npm run test    
 script:
   - rm -rf node_modules
   - zip -r latest *
