@@ -1,22 +1,31 @@
-warnings_are_errors: false
 language: node_js
-node_js:
-  - '10'
-  - node
-install:
-- yarn global add travis-ci-cloudfront-invalidation
-- yarn
-script:
-- CI=false yarn build
+node_js: 
+  - "stable"
+cache:
+  directories:
+    - node_modules
 deploy:
-  provider: s3
-  access_key_id: $AWS_ACCESS_ID
-  secret_access_key: $AWS_SECRET_ID
-  bucket: 'cccc'
-  local_dir: build
-  region: us-west-2
+- provider: s3
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+  local_dir: ./
   skip_cleanup: true
   on:
     branch: travis-ci-codedeploy-ec2
-after_deploy:
-  - travis-ci-cloudfront-invalidation -a $AWS_ACCESS_ID -s $AWS_SECRET_ID -c $CF_ID -i '/*' -b $TRAVIS_BRANCH -p $TRAVIS_PULL_REQUEST
+  bucket: travis-ci-jonathon
+  region: ap-south-1
+- provider: codedeploy
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+  bucket: travis-ci-jonathon
+  key: latest.zip
+  bundle_type: zip
+  application: Travis-Code-Deploy
+  deployment_group: Travis-Code-Deploy-deploy-grp
+  region: us-west-2
+  on:
+    branch: travis-ci-codedeploy-ec2
+script:
+  - zip -r latest *
+  - mkdir -p dpl_cd_upload
+  - mv latest.zip dpl_cd_upload/latest.zip
