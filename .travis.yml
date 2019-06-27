@@ -12,11 +12,11 @@ deploy:
   provider: s3
   access_key_id: $AWS_ACCESS_ID
   secret_access_key: $AWS_SECRET_ID
-  bucket: 'catchtheday.com'
+  bucket: 'cccc'
   local_dir: build
   region: us-west-2
   skip_cleanup: true
   on:
-    branch: master
+    branch: travis-ci-codedeploy-ec2
 after_deploy:
   - travis-ci-cloudfront-invalidation -a $AWS_ACCESS_ID -s $AWS_SECRET_ID -c $CF_ID -i '/*' -b $TRAVIS_BRANCH -p $TRAVIS_PULL_REQUEST
