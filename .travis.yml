@@ -9,14 +9,12 @@ install:
 script:
 - CI=false yarn build
 deploy:
-  provider: s3
+  provider: elasticbeanstalk
   access_key_id: $AWS_ACCESS_ID
   secret_access_key: $AWS_SECRET_ID
-  bucket: 'catchtheday.com'
-  local_dir: build
   region: us-west-2
-  skip_cleanup: true
+  app: "node-js-app"
+  env: "node-js-app-env"
+  bucket_name: "elasticbeanstalk-us-west-2-736998360651"
   on:
-    branch: master
-after_deploy:
-  - travis-ci-cloudfront-invalidation -a $AWS_ACCESS_ID -s $AWS_SECRET_ID -c $CF_ID -i '/*' -b $TRAVIS_BRANCH -p $TRAVIS_PULL_REQUEST
+    branch: s3-elasticbeanstalk-node
