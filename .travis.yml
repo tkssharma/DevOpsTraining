@@ -1,3 +1,4 @@
+warnings_are_errors: false
 language: node_js
 node_js:
   - '10'
@@ -6,8 +7,7 @@ install:
 - yarn global add travis-ci-cloudfront-invalidation
 - yarn
 script:
-- yarn build
-warnings_are_errors: false
+- CI=false yarn build
 deploy:
   provider: s3
   access_key_id: $AWS_ACCESS_ID
