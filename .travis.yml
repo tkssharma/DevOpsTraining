@@ -14,7 +14,7 @@ deploy:
   secret_access_key: $AWS_SECRET_ID
   region: us-west-2
   app: "node-js-app"
-  env: "node-js-app-env"
+  env: "NodeJsApp-env"
   bucket_name: "elasticbeanstalk-us-west-2-736998360651"
   on:
     branch: s3-elasticbeanstalk-node
