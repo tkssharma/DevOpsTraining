@@ -14,6 +14,7 @@ deploy:
   secret_access_key: $AWS_SECRET_ID
   bucket: 'catchtheday.com'
   local_dir: build
+  region: us-west-2
   skip_cleanup: true
   on:
     branch: master
