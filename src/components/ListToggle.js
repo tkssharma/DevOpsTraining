@@ -4,10 +4,10 @@ const ListToggle = (props) => {
 
 	const [toggled, setToggled] = useState(false);
 	const handleClick = () => {
-		if(this.state.toggled === true) {
-			this.setState({ toggled: false });
+		if(toggled === true) {
+			setToggled(false);
 		} else {
-			this.setState({ toggled: true });	
+			setToggled(true);	
 		}	
 	}
 		return (
