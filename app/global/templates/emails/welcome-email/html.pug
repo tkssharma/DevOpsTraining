@@ -1,0 +1,45 @@
+doctype html
+html(lang="en")
+	head
+		meta(http-equiv='Content-Type' content='text/html; charset=UTF-8')
+		meta(name='viewport' content='width=device-width')
+		title Welcome to Technology
+		link(rel='stylesheet' href='style.css' media="all")
+
+	body(itemscope itemtype="http://schema.org/EmailMessage")
+
+		table.body-wrap
+			tr
+				td
+				td.container(width="100")
+
+					.content
+
+						table.main(width="100%" cellpadding="0" cellspacing="0")
+							tr
+								td.alert.alert-warning.
+									Welcome - Your account has been successfully created.
+							tr
+								td.content-wrap
+									table(width="100%" cellpadding="0" cellspacing="0")
+										tr
+											td.content-block
+												h2 Hi #{user.name},
+										tr
+											td.content-block
+												p Thank your for signing up with us.
+										tr
+											td.content-block
+												p We will take you on an Epic food Adverture across India and other countries.
+												p Hope you will love the dining experience provided by us and our hosts.
+										tr
+											td.content-block
+												a.btn-primary(href= login_url) Login to your Account
+										tr
+											td.content-block.
+												Thank you for choosing Technology.
+						div.footer
+							table(width="100%")
+								tr
+									td.aligncenter.content-block.
+										&copy; 2016, Technology. All Rights Reserved.
