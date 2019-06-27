@@ -1,5 +1,6 @@
 import React from 'react'
-import $ from 'jquery'; 
+import $ from 'jquery';
+import axios from 'axios';
 import './assets/index.css';
 import Header from './components/partails/header';
 import Hero from './components/partails/hero';
@@ -19,18 +20,12 @@ class App extends React.Component{
 		// get the value
 		const val = $('.Search input').val();
 		const apiKey = '87dfa1c669eea853da609d4968d294be'
-
-		$.ajax({
-      url: 'https://api.themoviedb.org/3/search/multi?query=' + val + '&api_key=' + apiKey,
-      dataType: 'json',
-      cache: false,
-      success: function(data) {
-        this.setState({data: data});
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
-      }.bind(this)
-    });
+		axios.get('https://api.themoviedb.org/3/search/multi?query=' + val + '&api_key=' + apiKey)
+		  .then((data) => {
+						this.setState({data: data.data});
+			}).catch(err => {
+						console.error(this.props.url, err.toString());
+		  })
 	}
 	componentDidUpdate() {
 	}
