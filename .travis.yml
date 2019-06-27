@@ -11,8 +11,8 @@ deploy:
   provider: s3
   access_key_id: $AWS_ACCESS_ID
   secret_access_key: $AWS_SECRET_ID
-  bucket: 'XXX-frontend-app'
-  local_dir: dist
+  bucket: 'catchtheday.com'
+  local_dir: build
   skip_cleanup: true
   on:
     branch: master
