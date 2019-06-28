@@ -24,8 +24,8 @@ deploy:
   bucket: travis-ci-jonathon
   key: latest.zip
   bundle_type: zip
-  application: Travis-Code-Deploy
-  deployment_group: Travis-Code-Deploy-deploy-grp
+  application: aws-code-deploy-github
+  deployment_group: aws-code-deploy-github-group
   region: us-west-2
   on:
     branch: travis-ci-codedeploy-ec2
