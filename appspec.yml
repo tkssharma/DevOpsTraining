@@ -5,10 +5,10 @@ files:
     destination: /opt/api
 hooks:
   BeforeInstall:
-    - location: deploy/before_install
+    - location: deploy/before_install.sh
       timeout: 300
       runas: root
   AfterInstall:
-    - location: deploy/restart_server
+    - location: deploy/restart_server.sh
       timeout: 300
       runas: root
