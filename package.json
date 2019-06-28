@@ -1,29 +1,16 @@
 {
-  "name": "react-quiz-app",
+  "name": "elasticbeanstalk-helloworld",
   "version": "0.0.0",
   "private": true,
-  "dependencies": {
-    "axios": "^0.19.0",
-    "jquery": "^3.4.1",
-    "prop-types": "15.6.1",
-    "react": "16.1.1",
-    "react-dom": "16.1.1",
-    "react-redux": "5.0.7",
-    "redux": "3.7.2"
-  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "start": "node ./bin/www"
   },
-  "devDependencies": {
-    "react-scripts": "latest"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "dependencies": {
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "http-errors": "~1.6.2",
+    "jade": "~1.11.0",
+    "morgan": "~1.9.0"
+  }
 }

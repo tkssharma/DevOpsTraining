@@ -4,7 +4,6 @@ node_js:
   - '10'
   - node
 install:
-- yarn global add travis-ci-cloudfront-invalidation
 - yarn
 script:
 - CI=false yarn build
@@ -13,8 +12,8 @@ deploy:
   access_key_id: $AWS_ACCESS_ID
   secret_access_key: $AWS_SECRET_ID
   region: us-west-2
-  app: "node-js-app"
-  env: "NodeJsApp-env"
+  app: "node_app_develop"
+  env: "NodeAppDevelop-env"
   bucket_name: "elasticbeanstalk-us-west-2-736998360651"
   on:
     branch: s3-elasticbeanstalk-node
