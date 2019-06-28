@@ -6,7 +6,7 @@ node_js:
 install:
 - yarn
 script:
-- CI=false yarn build
+- CI=false npm run test
 deploy:
   provider: elasticbeanstalk
   access_key_id: $AWS_ACCESS_ID
