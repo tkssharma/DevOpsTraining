@@ -1,1 +1,1 @@
-echo 'hello'
+npm run deploy

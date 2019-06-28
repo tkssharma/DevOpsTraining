@@ -1,1 +1,2 @@
-echo 'hello'
+npm install
+npm run test
