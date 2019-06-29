@@ -33,7 +33,7 @@ prepare-dev:
   only:
     - master
   script:
-    - echo $DEV_ENV > ./env.sh && chmod a+x ./env.sh
+    - echo $ENV > ./env.sh && chmod a+x ./env.sh
     - rm -rf ../build && mkdir -p ../build && cp -rf * ../build && tar -zcvf build.tar ../build && scp build.tar $GID@$DEVSERVERIP:$BUILD_PATH
     - >
      ssh $GID@$DEVSERVERIP << EOF
