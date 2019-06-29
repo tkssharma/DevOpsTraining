@@ -3,7 +3,7 @@ module.exports = {
     {
       name: 'app_Server',
       script: 'app/server.js',
-      instances: 1,
+      instances: 2,
       env: {
         COMMON_VARIABLE: 'true',
       },
