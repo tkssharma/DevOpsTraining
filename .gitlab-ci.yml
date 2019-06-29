@@ -1,5 +1,5 @@
 # Select image from https://hub.docker.com/r/_/php/
-image: pac_image:1
+image: node:alpine
 
 cache:
     paths:
@@ -29,7 +29,7 @@ stages:
 prepare-dev:
   stage: prepare-dev
   tags:
-    - TAG
+    - node-dev
   only:
     - master
   script:
@@ -42,7 +42,7 @@ prepare-dev:
 dev-server-restart:
   stage: dev-server-restart
   tags:
-    - TAG
+    - node-dev
   only:
     - master
   script:
