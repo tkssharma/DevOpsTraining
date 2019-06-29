@@ -1,0 +1,23 @@
+stages:
+  - build
+  - deploy
+build dev:
+  image: node:10.15.0-stretch
+  stage: build
+  only:
+    - master
+  script:
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - build/
+    expire_in: 1 hour
+deploy dev:
+  image: python:latest
+  stage: deploy
+  only:
+    - master
+  script:
+    - pip install awscli
+    - aws s3 sync ./build s3://jonathan-s3-example
