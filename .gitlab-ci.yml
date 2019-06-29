@@ -24,17 +24,14 @@ before_script:
 
 stages:
   - prepare-dev
-  - dev-db-intilization
   - dev-server-restart
 
 prepare-dev:
   stage: prepare-dev
   tags:
-    - pac
-    - node
-    - dev
+    - TAG
   only:
-    - develop
+    - master
   script:
     - echo $DEV_ENV > ./env.sh && chmod a+x ./env.sh
     - rm -rf ../build && mkdir -p ../build && cp -rf * ../build && tar -zcvf build.tar ../build && scp build.tar $GID@$DEVSERVERIP:$BUILD_PATH
@@ -45,11 +42,9 @@ prepare-dev:
 dev-server-restart:
   stage: dev-server-restart
   tags:
-    - node
-    - pac
-    - dev
+    - TAG
   only:
-    - develop
+    - master
   script:
     - >
      ssh $GID@$DEVSERVERIP << EOF
