@@ -1,0 +1,57 @@
+# Select image from https://hub.docker.com/r/_/php/
+image: pac_image:1
+
+cache:
+    paths:
+    - ./node_modules
+    #- env.sh
+# Install dependencies
+before_script:
+  #  # Install ssh-agent if not already installed, it is required by Docker.
+  #  # (change apt-get to yum if you use a CentOS-based image)
+  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -yqq )'
+  #  # Run ssh-agent (inside the build environment)
+  - eval $(ssh-agent -s)
+  #  # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
+  - ssh-add <(echo "$SSH_PRIVATE_KEY")
+  #  # For Docker builds disable host key checking. Be aware that by adding that
+  #  # you are suspectible to man-in-the-middle attacks.
+  #  # WARNING: Use this only with the Docker executor, if you use it with shell
+  #  # you will overwrite your user's SSH config.
+  - mkdir -p ~/.ssh
+  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  #- export PATH=$PATH:/node_modules/@angular/cli/bin
+
+stages:
+  - prepare-dev
+  - dev-db-intilization
+  - dev-server-restart
+
+prepare-dev:
+  stage: prepare-dev
+  tags:
+    - pac
+    - node
+    - dev
+  only:
+    - develop
+  script:
+    - echo $DEV_ENV > ./env.sh && chmod a+x ./env.sh
+    - rm -rf ../build && mkdir -p ../build && cp -rf * ../build && tar -zcvf build.tar ../build && scp build.tar $GID@$DEVSERVERIP:$BUILD_PATH
+    - >
+     ssh $GID@$DEVSERVERIP << EOF
+       cd $BUILD_PATH && rm -rf build/* && tar -zxvf build.tar && rm -f build.tar && cd build && npm install
+     EOF
+dev-server-restart:
+  stage: dev-server-restart
+  tags:
+    - node
+    - pac
+    - dev
+  only:
+    - develop
+  script:
+    - >
+     ssh $GID@$DEVSERVERIP << EOF
+       cd $BUILD_PATH/build && source ./env.sh && npm run deploy
+     EOF
