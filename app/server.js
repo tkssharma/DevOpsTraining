@@ -20,9 +20,9 @@ new AppRoutes(app, express);
 new swagger(app);
 
 //---------------------------------------------//
-let server = app.listen(process.env.PORT  || 3001,
+let server = app.listen(process.env.PORT,
     () => {
-        const port = process.env.PORT || 3001;
+        const port = process.env.PORT;
         winston.log('info', `GenNext API running at http://localhost:${port}`)
         console.log('runing...')
     }
