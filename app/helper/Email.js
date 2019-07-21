@@ -1,5 +1,3 @@
-
-
 const nodemailer = require('nodemailer');
 const config = require('../config/api');
 const email_config = require('../config/email');
